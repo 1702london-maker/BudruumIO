@@ -207,6 +207,8 @@ function Metric({ label, value, tone }: { label: string; value: string; tone: st
 }
 
 function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
+  const switchItems = ['Payroll', 'HR', 'Compliance docs', 'Training', 'HMRC', 'Accounting']
+
   return (
     <main className="site-shell">
       <header className="site-nav">
@@ -222,6 +224,11 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
         </nav>
         <button className="site-nav-cta" type="button" onClick={onOpenApp}>Open dashboard</button>
       </header>
+
+      <button className="side-dashboard-button" type="button" onClick={onOpenApp}>
+        <LayoutDashboard size={17} />
+        <span>Open dashboard</span>
+      </button>
 
       <section className="site-hero">
         <div className="site-hero-copy">
@@ -257,12 +264,6 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
             <span>Journal status <b>Ready</b></span>
           </div>
         </motion.div>
-      </section>
-
-      <section className="site-switcher">
-        {['Payroll', 'HR', 'Compliance docs', 'Training', 'HMRC', 'Accounting'].map((item) => (
-          <span key={item}>{item}</span>
-        ))}
       </section>
 
       <section className="site-section" id="platform">
@@ -315,13 +316,36 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
         <p>Local frontend first. Supabase schema second. GitHub third. Vercel only when the product shape is worth shipping.</p>
         <button className="primary-action" type="button" onClick={onOpenApp}>Open dashboard</button>
       </section>
+
+      <footer className="site-footer">
+        <div className="footer-brand">
+          <div className="brand-mark"><Fingerprint size={20} /></div>
+          <strong>budruumOS</strong>
+        </div>
+        <section className="site-switcher footer-switcher" aria-label="budruumOS platform areas">
+          {switchItems.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </section>
+        <nav>
+          <a href="#privacy">Privacy</a>
+          <a href="#terms">Terms</a>
+        </nav>
+      </footer>
     </main>
   )
 }
 
 function Feature({ icon: Icon, title, copy }: { icon: typeof Activity; title: string; copy: string }) {
   return (
-    <motion.article className="site-feature" whileHover={{ y: -5 }}>
+    <motion.article
+      className="site-feature"
+      initial={{ opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.35 }}
+      transition={{ duration: 0.48 }}
+      whileHover={{ y: -5, rotate: -0.35 }}
+    >
       <Icon size={22} />
       <h3>{title}</h3>
       <p>{copy}</p>
