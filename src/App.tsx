@@ -94,7 +94,47 @@ function Orb({ className }: { className: string }) {
   return <div className={`orb ${className}`} aria-hidden />
 }
 
-/* â”€â”€â”€ App Shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─── Word-by-word blur reveal (hero, fires on load) ─────── */
+function SplitHero({ text, baseDelay = 0 }: { text: string; baseDelay?: number }) {
+  return (
+    <>
+      {text.split(' ').map((word, i) => (
+        <motion.span
+          key={i}
+          style={{ display: 'inline-block', marginRight: '0.28em' }}
+          initial={{ opacity: 0, y: 18, filter: 'blur(8px)', skewY: 2 }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)', skewY: 0 }}
+          transition={{ duration: 0.65, delay: baseDelay + i * 0.075, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </>
+  )
+}
+
+/* ─── Word-by-word blur reveal (scroll sections) ─────────── */
+function SplitInView({ text, baseDelay = 0 }: { text: string; baseDelay?: number }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+  return (
+    <span ref={ref}>
+      {text.split(' ').map((word, i) => (
+        <motion.span
+          key={i}
+          style={{ display: 'inline-block', marginRight: '0.28em' }}
+          initial={{ opacity: 0, y: 18, filter: 'blur(6px)' }}
+          animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+          transition={{ duration: 0.6, delay: baseDelay + i * 0.065, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </span>
+  )
+}
+
+/* ─── App Shell ────────────────────────────────────────────── */
 function App() {
   const [active, setActive] = useState<ModuleKey>('control')
   const [surface, setSurface] = useState<'site' | 'app'>('site')
@@ -324,18 +364,14 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
             <span>Payroll · HR · Compliance · HMRC · Accounting</span>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          >
-            One place to run the business side of employing people.
-          </motion.h1>
+          <h1>
+            <SplitHero text="One place to run the business side of employing people." baseDelay={0.12} />
+          </h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 22, filter: 'blur(4px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.65, delay: 0.72, ease: [0.22, 1, 0.36, 1] }}
           >
             Payroll runs, employee records, compliance documents, training, HMRC duties and
             accounting journals â€” connected for UK small businesses and accountants.
@@ -469,12 +505,9 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >Platform</motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 22 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          >Every people action flows into payroll and compliance.</motion.h2>
+          <motion.h2>
+            <SplitInView text="Every people action flows into payroll and compliance." baseDelay={0.05} />
+          </motion.h2>
         </div>
         <div className="site-feature-grid">
           {[
@@ -499,8 +532,8 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="eyebrow">Compliance documents + training</span>
-          <h2>Compliance is not a folder. It is a live evidence system.</h2>
-          <p>Policies, signed acknowledgements, mandatory courses, certificates and renewal deadlines sit together so employers can prove what happened, when, and who approved it.</p>
+          <h2><SplitInView text="Compliance is not a folder. It is a live evidence system." baseDelay={0.05} /></h2>
+          <motion.p initial={{ opacity: 0, filter: 'blur(4px)' }} whileInView={{ opacity: 1, filter: 'blur(0px)' }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.35 }}>Policies, signed acknowledgements, mandatory courses, certificates and renewal deadlines sit together so employers can prove what happened, when, and who approved it.</motion.p>
         </motion.div>
         <div className="evidence-stack">
           {[
@@ -535,9 +568,7 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
       <section className="site-section" id="accountants">
         <div className="section-title">
           <motion.span className="eyebrow" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>For accountants</motion.span>
-          <motion.h2 initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55 }}>
-            A bureau command centre for every client payroll.
-          </motion.h2>
+          <h2><SplitInView text="A bureau command centre for every client payroll." baseDelay={0.05} /></h2>
         </div>
         <div className="accountant-board">
           {bureauClients.map(([name, status, type, size], i) => (
@@ -560,12 +591,11 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
 
       {/* â”€â”€ Final CTA â”€â”€ */}
       <section className="site-final" id="pricing">
-        <motion.h2
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55 }}
-        >Start with the dashboard prototype.<br />Then wire the real engine.</motion.h2>
+        <h2>
+          <SplitInView text="Start with the dashboard prototype." baseDelay={0.05} />
+          <br />
+          <SplitInView text="Then wire the real engine." baseDelay={0.45} />
+        </h2>
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
