@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useInView, useMotionValue, useSpring } from 'framer-motion'
+﻿import { AnimatePresence, motion, useInView, useMotionValue, useSpring } from 'framer-motion'
 import {
   Activity,
   Banknote,
@@ -72,7 +72,7 @@ const bureauClients = [
   ['Hale Studios',   'PAYE payment due',    'Action', '11 employees'],
 ]
 
-/* ─── Animated counter ─────────────────────────────────────── */
+/* â”€â”€â”€ Animated counter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function AnimatedCounter({ value, prefix = '', suffix = '' }: { value: number; prefix?: string; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true })
@@ -89,12 +89,12 @@ function AnimatedCounter({ value, prefix = '', suffix = '' }: { value: number; p
   return <span ref={ref}>{prefix}{display}{suffix}</span>
 }
 
-/* ─── Floating orb ─────────────────────────────────────────── */
+/* â”€â”€â”€ Floating orb â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function Orb({ className }: { className: string }) {
   return <div className={`orb ${className}`} aria-hidden />
 }
 
-/* ─── App Shell ────────────────────────────────────────────── */
+/* â”€â”€â”€ App Shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function App() {
   const [active, setActive] = useState<ModuleKey>('control')
   const [surface, setSurface] = useState<'site' | 'app'>('site')
@@ -107,7 +107,7 @@ function App() {
 
   return (
     <main className="app-shell">
-      {/* ── Sidebar ── */}
+      {/* â”€â”€ Sidebar â”€â”€ */}
       <aside className="sidebar">
         <div className="brand-lockup">
           <motion.div className="brand-mark" whileHover={{ scale: 1.08, rotate: 3 }} transition={{ type: 'spring', stiffness: 300 }}>
@@ -119,7 +119,7 @@ function App() {
           </div>
         </div>
 
-        <button className="surface-switch" type="button" onClick={() => setSurface('site')}>← View website</button>
+        <button className="surface-switch" type="button" onClick={() => setSurface('site')}>â† View website</button>
 
         <nav className="module-nav" aria-label="Product modules">
           {modules.map((item, i) => {
@@ -155,7 +155,7 @@ function App() {
         </motion.div>
       </aside>
 
-      {/* ── Workspace ── */}
+      {/* â”€â”€ Workspace â”€â”€ */}
       <section className="workspace">
         <header className="topbar">
           <motion.div className="search-box" whileFocus={{ scale: 1.01 }}>
@@ -226,7 +226,7 @@ function App() {
   )
 }
 
-/* ─── Metric card ──────────────────────────────────────────── */
+/* â”€â”€â”€ Metric card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function Metric({ label, tone, num, prefix }: { label: string; value: string; tone: string; num: number; prefix?: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true })
@@ -252,7 +252,7 @@ function Metric({ label, tone, num, prefix }: { label: string; value: string; to
   )
 }
 
-/* ─── Marketing Site ───────────────────────────────────────── */
+/* â”€â”€â”€ Marketing Site â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
   const switchItems = ['Payroll', 'HR', 'Compliance docs', 'Training', 'HMRC', 'Accounting', 'Privacy', 'Terms']
 
@@ -263,7 +263,7 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
       <Orb className="orb-2" />
       <Orb className="orb-3" />
 
-      {/* ── Nav ── */}
+      {/* â”€â”€ Nav â”€â”€ */}
       <motion.header
         className="site-nav"
         initial={{ opacity: 0, y: -18 }}
@@ -311,7 +311,7 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
         <span>Open dashboard</span>
       </motion.button>
 
-      {/* ── Hero ── */}
+      {/* â”€â”€ Hero â”€â”€ */}
       <section className="site-hero">
         <div className="site-hero-copy">
           <motion.div
@@ -338,7 +338,7 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
             transition={{ duration: 0.6, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
           >
             Payroll runs, employee records, compliance documents, training, HMRC duties and
-            accounting journals — connected for UK small businesses and accountants.
+            accounting journals â€” connected for UK small businesses and accountants.
           </motion.p>
 
           <motion.div
@@ -356,7 +356,7 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
             >
               Explore dashboard <ChevronRight size={16} />
             </motion.button>
-            <a href="#platform" className="ghost-link">See modules →</a>
+            <a href="#platform" className="ghost-link">See modules â†’</a>
           </motion.div>
 
           {/* Live stat strip */}
@@ -393,7 +393,7 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
         >
           <div className="mini-topbar">
             <span className="dot red" /><span className="dot amber" /><span className="dot green" />
-            <span className="mini-title">budruumOS — July payroll</span>
+            <span className="mini-title">budruumOS â€” July payroll</span>
           </div>
 
           <div className="mini-control">
@@ -439,10 +439,17 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
 
           {/* Floating glow */}
           <div className="card-glow" aria-hidden />
+          <div className="hero-accounting-flow" aria-hidden="true">
+            <span>Payroll calculated</span>
+            <i />
+            <span>PAYE liability</span>
+            <i />
+            <span>Accounting posted</span>
+          </div>
         </motion.div>
       </section>
 
-      {/* ── Ticker strip ── */}
+      {/* â”€â”€ Ticker strip â”€â”€ */}
       <div className="ticker-strip" aria-hidden>
         <div className="ticker-track">
           {[...Array(3)].flatMap((_, rep) =>
@@ -453,7 +460,7 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
         </div>
       </div>
 
-      {/* ── Feature Grid ── */}
+      {/* â”€â”€ Feature Grid â”€â”€ */}
       <section className="site-section" id="platform">
         <div className="section-title">
           <motion.span
@@ -483,7 +490,7 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
         </div>
       </section>
 
-      {/* ── Compliance band ── */}
+      {/* â”€â”€ Compliance band â”€â”€ */}
       <section className="site-band" id="compliance">
         <motion.div
           initial={{ opacity: 0, x: -32 }}
@@ -524,7 +531,7 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
         </div>
       </section>
 
-      {/* ── Bureau board ── */}
+      {/* â”€â”€ Bureau board â”€â”€ */}
       <section className="site-section" id="accountants">
         <div className="section-title">
           <motion.span className="eyebrow" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>For accountants</motion.span>
@@ -551,7 +558,7 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
         </div>
       </section>
 
-      {/* ── Final CTA ── */}
+      {/* â”€â”€ Final CTA â”€â”€ */}
       <section className="site-final" id="pricing">
         <motion.h2
           initial={{ opacity: 0, y: 22 }}
@@ -601,7 +608,7 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
   )
 }
 
-/* ─── Feature card ─────────────────────────────────────────── */
+/* â”€â”€â”€ Feature card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function Feature({ icon: Icon, title, copy, color, index }: {
   icon: typeof Activity; title: string; copy: string; color: string; index: number
 }) {
@@ -620,11 +627,86 @@ function Feature({ icon: Icon, title, copy, color, index }: {
       </div>
       <h3>{title}</h3>
       <p>{copy}</p>
+      <ServiceAnimation title={title} />
     </motion.article>
   )
 }
 
-/* ─── Panel ────────────────────────────────────────────────── */
+function ServiceAnimation({ title }: { title: string }) {
+  if (title === 'Accounting') {
+    return (
+      <div className="service-visual accounting-visual" aria-hidden="true">
+        <div className="ledger-card debit">
+          <span>Wages</span>
+          <strong>£184,920</strong>
+        </div>
+        <div className="ledger-card credit">
+          <span>PAYE</span>
+          <strong>£24,806</strong>
+        </div>
+        <div className="ledger-card post">
+          <span>Journal</span>
+          <strong>Posted</strong>
+        </div>
+        <i className="ledger-pulse" />
+      </div>
+    )
+  }
+
+  if (title === 'HMRC PAYE') {
+    return (
+      <div className="service-visual hmrc-visual" aria-hidden="true">
+        <span>FPS</span>
+        <i />
+        <span>PAYE</span>
+        <i />
+        <span>HMRC</span>
+      </div>
+    )
+  }
+
+  if (title === 'Time and rota') {
+    return (
+      <div className="service-visual rota-visual" aria-hidden="true">
+        {['M', 'T', 'W', 'T', 'F'].map((day, index) => (
+          <span style={{ '--delay': `${index * 0.16}s` } as React.CSSProperties} key={`${day}-${index}`}>{day}</span>
+        ))}
+      </div>
+    )
+  }
+
+  if (title === 'Compliance hub') {
+    return (
+      <div className="service-visual compliance-visual" aria-hidden="true">
+        <span style={{ '--w': '94%' } as React.CSSProperties}>Policies</span>
+        <span style={{ '--w': '78%' } as React.CSSProperties}>Training</span>
+        <span style={{ '--w': '92%' } as React.CSSProperties}>Evidence</span>
+      </div>
+    )
+  }
+
+  if (title === 'Bureau portal') {
+    return (
+      <div className="service-visual bureau-visual" aria-hidden="true">
+        <span>Ready</span>
+        <span>Client</span>
+        <span>Risk</span>
+        <span>Action</span>
+      </div>
+    )
+  }
+
+  return (
+    <div className="service-visual people-visual" aria-hidden="true">
+      <span />
+      <span />
+      <span />
+      <i />
+    </div>
+  )
+}
+
+/* â”€â”€â”€ Panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function Panel({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
     <motion.article
@@ -638,7 +720,7 @@ function Panel({ children, className = '' }: { children: React.ReactNode; classN
   )
 }
 
-/* ─── Drawer content ───────────────────────────────────────── */
+/* â”€â”€â”€ Drawer content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const drawerContent = {
   anomalies: {
     kicker: 'Pre-run review',
@@ -684,7 +766,7 @@ const drawerContent = {
   },
 } satisfies Record<string, DrawerData>
 
-/* ─── Dashboard modules ────────────────────────────────────── */
+/* â”€â”€â”€ Dashboard modules â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function ControlRoom({ openDrawer }: { openDrawer: (d: DrawerData) => void }) {
   return (
     <>
@@ -826,7 +908,7 @@ function TimeLocation({ openDrawer }: { openDrawer: (d: DrawerData) => void }) {
           {['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day, i) => (
             <motion.div className="shift-cell" key={day} whileHover={{ scale: 1.04, y: -4 }}>
               <strong>{day}</strong>
-              <span>{i % 2 ? '09:00–17:30' : '08:00–16:00'}</span>
+              <span>{i % 2 ? '09:00â€“17:30' : '08:00â€“16:00'}</span>
               <em>{i === 2 ? 'Overtime' : 'Approved'}</em>
             </motion.div>
           ))}
@@ -992,14 +1074,14 @@ function Bureau({ openDrawer }: { openDrawer: (d: DrawerData) => void }) {
   )
 }
 
-/* ─── Action Row ───────────────────────────────────────────── */
+/* â”€â”€â”€ Action Row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function ActionRow({ icon: Icon, label, value, onClick }: { icon: typeof Activity; label: string; value: string; onClick?: () => void }) {
   const content = <><Icon size={17} /><span>{label}</span><strong>{value}</strong></>
   if (onClick) return <button className="action-row action-button" type="button" onClick={onClick}>{content}</button>
   return <div className="action-row">{content}</div>
 }
 
-/* ─── Detail Drawer ────────────────────────────────────────── */
+/* â”€â”€â”€ Detail Drawer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function DetailDrawer({ data, onClose }: { data: DrawerData | null; onClose: () => void }) {
   return (
     <AnimatePresence>
@@ -1048,3 +1130,5 @@ function DetailDrawer({ data, onClose }: { data: DrawerData | null; onClose: () 
 }
 
 export default App
+
+
