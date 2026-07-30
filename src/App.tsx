@@ -207,7 +207,7 @@ function Metric({ label, value, tone }: { label: string; value: string; tone: st
 }
 
 function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
-  const switchItems = ['Payroll', 'HR', 'Compliance docs', 'Training', 'HMRC', 'Accounting']
+  const switchItems = ['Payroll', 'HR', 'Compliance docs', 'Training', 'HMRC', 'Accounting', 'Privacy', 'Terms']
 
   return (
     <main className="site-shell">
@@ -317,6 +317,16 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
         <button className="primary-action" type="button" onClick={onOpenApp}>Open dashboard</button>
       </section>
 
+      <section className="legal-strip" id="privacy">
+        <strong>Privacy</strong>
+        <span>budruumOS will treat employee, payroll and compliance records as sensitive business data by design.</span>
+      </section>
+
+      <section className="legal-strip" id="terms">
+        <strong>Terms</strong>
+        <span>Platform terms will define employer responsibilities, payroll approvals, audit logs and third-party service connections.</span>
+      </section>
+
       <footer className="site-footer">
         <div className="footer-brand">
           <div className="brand-mark"><Fingerprint size={20} /></div>
@@ -324,13 +334,9 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
         </div>
         <section className="site-switcher footer-switcher" aria-label="budruumOS platform areas">
           {switchItems.map((item) => (
-            <span key={item}>{item}</span>
+            <a href={item === 'Privacy' ? '#privacy' : item === 'Terms' ? '#terms' : '#platform'} key={item}>{item}</a>
           ))}
         </section>
-        <nav>
-          <a href="#privacy">Privacy</a>
-          <a href="#terms">Terms</a>
-        </nav>
       </footer>
     </main>
   )
