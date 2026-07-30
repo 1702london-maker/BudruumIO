@@ -144,9 +144,9 @@ function App() {
         <section className="hero-band">
           <motion.div
             className="hero-copy"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
+            initial={{ opacity: 0, y: 18, filter: 'blur(4px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="eyebrow"><ActiveIcon size={15} /> July 2026 payroll workspace</span>
             <h1>Payroll control room</h1>
@@ -169,7 +169,7 @@ function App() {
             >
               <span className="switch-icon"><item.icon size={15} /></span>
               <span>{item.label}</span>
-              {active === item.key && <motion.i layoutId="switch-active" />}
+              {active === item.key && <motion.i layoutId="switch-active" transition={{ type: 'spring', stiffness: 340, damping: 30 }} />}
             </button>
           ))}
         </div>
@@ -199,11 +199,27 @@ function App() {
 
 function Metric({ label, value, tone }: { label: string; value: string; tone: string }) {
   return (
-    <motion.div className={`metric ${tone}`} whileHover={{ y: -3 }}>
+    <motion.div
+      className={`metric ${tone}`}
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -4, scale: 1.02 }}
+    >
       <span>{label}</span>
       <strong>{value}</strong>
     </motion.div>
   )
+}
+
+const staggerContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.15 } },
+}
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 22, filter: 'blur(4px)' },
+  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.52, ease: [0.22, 1, 0.36, 1] } },
 }
 
 function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
@@ -231,19 +247,36 @@ function MarketingSite({ onOpenApp }: { onOpenApp: () => void }) {
       </button>
 
       <section className="site-hero">
-        <div className="site-hero-copy">
-          <span className="eyebrow"><Sparkles size={15} /> Payroll, HR and compliance</span>
-          <h1>One place to run the business side of employing people.</h1>
-          <p>
+        <motion.div
+          className="site-hero-copy"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="show"
+        >
+          <motion.span className="eyebrow" variants={fadeUp}><Sparkles size={15} /> Payroll, HR and compliance</motion.span>
+          <motion.h1 variants={fadeUp}>One place to run the business side of employing people.</motion.h1>
+          <motion.p variants={fadeUp}>
             Payroll runs, employee records, compliance documents, training, HMRC duties and
             accounting journals, connected for small businesses and accountants.
-          </p>
-          <div className="site-cta-row">
-            <button className="primary-action" type="button" onClick={onOpenApp}>Explore dashboard</button>
+          </motion.p>
+          <motion.div className="site-cta-row" variants={fadeUp}>
+            <motion.button
+              className="primary-action"
+              type="button"
+              onClick={onOpenApp}
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+            >Explore dashboard</motion.button>
             <a href="#platform">See modules</a>
-          </div>
-        </div>
-        <motion.div className="site-product-card" initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }}>
+          </motion.div>
+        </motion.div>
+        <motion.div
+          className="site-product-card"
+          initial={{ opacity: 0, y: 32, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          whileHover={{ y: -6 }}
+        >
           <div className="mini-topbar">
             <span />
             <span />
@@ -346,11 +379,11 @@ function Feature({ icon: Icon, title, copy }: { icon: typeof Activity; title: st
   return (
     <motion.article
       className="site-feature"
-      initial={{ opacity: 0, y: 26 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.35 }}
-      transition={{ duration: 0.48 }}
-      whileHover={{ y: -5, rotate: -0.35 }}
+      initial={{ opacity: 0, y: 28, filter: 'blur(4px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -6, rotate: -0.3, scale: 1.01 }}
     >
       <Icon size={22} />
       <h3>{title}</h3>
